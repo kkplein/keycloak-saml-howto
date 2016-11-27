@@ -34,6 +34,7 @@ Install apache2 plus enable the required packages:
 ```
 a2enmod proxy proxy_http headers
 ```
+The keycloak VHOST config:
 ```
 <VirtualHost *:443>
 		ServerAdmin webmaster@localhost
