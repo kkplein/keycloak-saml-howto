@@ -4,15 +4,11 @@ A simple howto for keycloak / saml with external SP
 This is a simple howto, to:
 * setup RedHat's keycloak on debian jessie
 * configure apache as an SSL reverse proxy
-* connect your active directory DCs with HAProxy failover
+* connect it to your active directory DCs, using HAProxy failover
 * configure kerberos for AD SSO
-* connect simplesamlphp to this setup as a SAML client
-* connect wordpress to this setup as a SAML client
+* connect some common clients to this setup using SAML
 
-```
-piece of code
-```
-## java
+## setup java
 Since keycloak is a java program, we need to install a java runtime engine, jre. Debian comes with openjdk-8-jre, but in my testing it did not work with kerberos authentication, so we are using oracle java 8, installed using these instructions: http://www.webupd8.org/2014/03/how-to-install-oracle-java-8-in-debian.html
 
 Make sure to also configure oracle as the default runtime, so that your output is similar to this:
@@ -23,18 +19,18 @@ Java(TM) SE Runtime Environment (build 1.8.0_111-b14)
 Java HotSpot(TM) 64-Bit Server VM (build 25.111-b14, mixed mode)
 root@keycloak:~# 
 ```
-## keycloak
+## install keycloak
 Download the standalone server distribution keycloak from http://www.keycloak.org/downloads.html and move the extracted files to /usr/local/keycloak. Start keycloak:
 ```
 /usr/local/keycloak/bin/standalone.sh
 ```
 
-## apache2 reverse proxy config
+## configure apache2 reverse proxy config
 Install apache2 plus enable the required packages: 
 ```
 a2enmod proxy proxy_http headers
 ```
-The keycloak VHOST config:
+A sample keycloak VirtualHost config:
 ```
 <VirtualHost *:443>
 		ServerAdmin webmaster@localhost
