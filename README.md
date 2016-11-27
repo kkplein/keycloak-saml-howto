@@ -30,6 +30,10 @@ Download the standalone server distribution keycloak from http://www.keycloak.or
 ```
 
 ## apache2 reverse proxy config
+Install apache2 plus enable the required packages: 
+```
+a2enmod proxy proxy_http headers
+```
 ```
 <VirtualHost *:443>
 		ServerAdmin webmaster@localhost
@@ -71,5 +75,4 @@ Download the standalone server distribution keycloak from http://www.keycloak.or
 		SSLCertificateChainFile /etc/ssl/apache2/keycloak/fullchain.pem
 
 </VirtualHost>
-
 ```
