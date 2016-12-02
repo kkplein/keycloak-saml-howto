@@ -73,3 +73,21 @@ A sample keycloak VirtualHost config:
 
 </VirtualHost>
 ```
+## kerberos samba4
+create a user for keycloak:
+```
+samba-tool user create keycloak --random-password
+samba-tool spn add HTTP/keycloak.company.com keycloak
+samba-tool domain exportkeytab --principal HTTP/keycloak.company.com keycloak.keytab
+```
+List keys in files.keytab:
+```
+klist -k ./keycloak.keytab 
+ Keytab name: FILE:./keycloak.keytab
+ KVNO Principal
+ ---- --------------------------------------------------------------------------
+   2 HTTP/keycloak.company.com@SAMBA.COMPANY.COM
+   2 HTTP/keycloak.company.com@SAMBA.COMPANY.COM
+   2 HTTP/keycloak.company.com@SAMBA.COMPANY.COM
+```
+Make sure that a forward AND reverse dns for keycloak.company.com exists!
